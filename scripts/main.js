@@ -7,7 +7,13 @@ var myButton     =      document.querySelector('button');
 var myTitle      =      document.querySelector('title');
 
 function isNameDefined() {
-    return localStorage.getItem('name');
+    if ((localStorage.getItem('name') === "") || (localStorage.getItem('name') === "null")) {
+        return false;
+    }
+    else
+    {
+        return true;
+    }
 }
 
 function currentlyJack() {
