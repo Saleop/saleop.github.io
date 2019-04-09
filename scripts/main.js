@@ -6,54 +6,64 @@ var myMessage    =      document.querySelector('p.greeting');
 var myButton     =      document.querySelector('button');
 var myTitle      =      document.querySelector('title');
 
-mascot.onclick = function() {
-    var mySrc = mascot.getAttribute('src');
-    if(mySrc === 'images/jackfrost.png') {
-        mascot.setAttribute('src', 'images/teddy.png');
-        myHtml.setAttribute('class', 'teddy');
-        myBody.setAttribute('class', 'teddy');
-        nameCheck();
-        myMessage.textContent = "It's bear-y nice to meet you!";
-        myTitle.textContent = "Hey, baby~"
+function isNameDefined() {
+    return localStorage.getItem('name');
+}
+
+function setJackMessage() {
+    if (isNameDefined()) {
+        myHeader.textContent = "Hee Hell-ho, " + localStorage.getItem('name') + "!";
     }
     else {
-        mascot.setAttribute('src', 'images/jackfrost.png');
-        mascot.setAttribute('alt', 'The true mascot of Atlus');
-        myHtml.setAttribute('class', 'jack');
-        myBody.setAttribute('class', 'jack');
-        nameCheck();
-        myMessage.textContent = "Welcome to my website, ho!";
-        myTitle.textContent = "Hee Ho!";
+        myHeader.textContent = "Hee Hell-ho!";
     }
 }
 
-function setUserName() {
-    var myName = prompt('Please enter your name.');
-    localStorage.setItem('name', myName);
+function setTeddyMessage() {
+    if (isNameDefined()) {
+        myHeader.textContent = "Hello, " + localStorage.getItem('name') + "! My name's Teddy!";
+    }
+    else {
+        myHeader.textContent = "Hello! My name's Teddy!";
+    }
+}
+
+function changeToJack() {
+    mascot.setAttribute('src', 'images/jackfrost.png');
+    myHtml.setAttribute('class', 'jack');
+    myBody.setAttribute('class', 'jack');
+    myMessage.textContent = "Welcome to my website, ho!";
+    myTitle.textContent = "Hee ho!";
+    setJackMessage();
+}
+
+function changeToTeddy() {
+    mascot.setAttribute('src', 'images/teddy.png');
+    myHtml.setAttribute('class', 'teddy');
+    myBody.setAttribute('class', 'teddy');
+    myMessage.textContent = "It's bear-y nice to meet you!";
+    myTitle.textContent = "Bear-sona!";
+    setTeddyMessage();
+}
+
+myButton.onclick = function () {
+    var storedName = prompt('Please enter your name.');
+    localStorage.setItem('name', storedName);
     if (mascot.getAttribute('src') === 'images/jackfrost.png') {
-        myHeader.textContent = 'Hee Hell-ho, ' + myName + '!';
+        setJackMessage();
     }
-    else {
-        myHeader.textContent = 'Hello, ' + myName + "! My name's Teddy!";j
-    }
-}
-
-function nameCheck () {
-        if(!localStorage.getItem('name')) {
-        setUserName();
-    } else {
-        var storedName = localStorage.getItem('name');
-        if (mascot.getAttribute('src') === 'images/jackfrost.png') {
-            myHeader.textContent = 'Hee Hell-ho, ' + storedName + '!';
-        }
-        else {
-            myHeader.textContent = 'Hello, ' + storedName + "! My name's Teddy!";j
-        }
+    else
+    {
+        setTeddyMessage();
     }
 }
 
-nameCheck();
-
-myButton.onclick = function() {
-  setUserName();
+mascot.onclick = function () {
+    if (mascot.getAttribute('src') === 'images/jackfrost.png') {
+        changeToTeddy();
+    }
+    else
+    {
+        changeToJack();
+    }
 }
