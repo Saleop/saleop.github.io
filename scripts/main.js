@@ -4,6 +4,7 @@ var myBody       =      document.querySelector('body');
 var myHeader     =      document.querySelector('h1');
 var myMessage    =      document.querySelector('p.greeting');
 var myButton     =      document.querySelector('button');
+var myTitle      =      document.querySelector('title');
 
 mascot.onclick = function() {
     var mySrc = mascot.getAttribute('src');
@@ -13,6 +14,7 @@ mascot.onclick = function() {
         myBody.setAttribute('class', 'teddy');
         nameCheck();
         myMessage.textContent = "It's bear-y nice to meet you!";
+        myTitle.textContent = "Hey, baby~"
     }
     else {
         mascot.setAttribute('src', 'images/jackfrost.png');
@@ -21,6 +23,7 @@ mascot.onclick = function() {
         myBody.setAttribute('class', 'jack');
         nameCheck();
         myMessage.textContent = "Welcome to my website, ho!";
+        myTitle.textContent = "Hee Ho!";
     }
 }
 
