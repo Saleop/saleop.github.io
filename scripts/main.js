@@ -10,6 +10,10 @@ function isNameDefined() {
     return localStorage.getItem('name');
 }
 
+function currentlyJack() {
+    return (mascot.getAttribute('src') === 'images/jackfrost.png');
+}
+
 function setJackMessage() {
     if (isNameDefined()) {
         myHeader.textContent = "Hee Hell-ho, " + localStorage.getItem('name') + "!";
@@ -25,6 +29,16 @@ function setTeddyMessage() {
     }
     else {
         myHeader.textContent = "Hello! My name's Teddy!";
+    }
+}
+
+function setMessage() {
+    if (currentlyJack()) {
+        setJackMessage();
+    }
+    else
+    {
+        setTeddyMessage();
     }
 }
 
@@ -49,7 +63,7 @@ function changeToTeddy() {
 myButton.onclick = function () {
     var storedName = prompt('Please enter your name.');
     localStorage.setItem('name', storedName);
-    if (mascot.getAttribute('src') === 'images/jackfrost.png') {
+    if (currentlyJack()) {
         setJackMessage();
     }
     else
@@ -59,11 +73,27 @@ myButton.onclick = function () {
 }
 
 mascot.onclick = function () {
-    if (mascot.getAttribute('src') === 'images/jackfrost.png') {
+    if (currentlyJack()) {
         changeToTeddy();
     }
     else
     {
         changeToJack();
+    }
+}
+
+if (isNameDefined()) {
+    setMessage();
+}
+else
+{
+    var storedName = prompt('Please enter your name.');
+    localStorage.setItem('name', storedName);
+    if (currentlyJack()) {
+        setJackMessage();
+    }
+    else
+    {
+        setTeddyMessage();
     }
 }
